@@ -8,6 +8,7 @@ import com.sromku.simple.storage.Storage;
 import com.sromku.simple.storage.helpers.OrderType;
 
 import net.gotev.uploadservice.MultipartUploadRequest;
+import net.gotev.uploadservice.BinaryUploadRequest;
 import net.gotev.uploadservice.ServerResponse;
 import net.gotev.uploadservice.UploadInfo;
 import net.gotev.uploadservice.UploadService;
@@ -64,9 +65,10 @@ public class FileTransferBackground extends CordovaPlugin {
     this.createUploadInfoFile(payload.id, jsonPayload);
     final FileTransferBackground self = this;
     if (NetworkMonitor.isConnected) {
-      MultipartUploadRequest request = new MultipartUploadRequest(this.cordova.getActivity().getApplicationContext(), payload.id,payload.serverUrl)
-        .addFileToUpload(payload.filePath, payload.fileKey)
+      BinaryUploadRequest request = new BinaryUploadRequest(this.cordova.getActivity().getApplicationContext(), payload.serverUrl)
+        .setFileToUpload(payload.filePath)
         .setMaxRetries(0)
+        .setMethod("PUT")
         .setDelegate(new UploadStatusDelegate() {
           @Override
           public void onProgress(Context context, UploadInfo uploadInfo) {
