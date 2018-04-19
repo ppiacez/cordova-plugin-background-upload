@@ -114,7 +114,7 @@ NSString *const FormatTypeName[5] = {
     NSURL * url = [NSURL URLWithString:uploadUrl];
     
     NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"POST"];
+    [request setHTTPMethod:@"PUT"];
     
     
     NSString *boundary = [NSString stringWithFormat:@"Boundary-%@", [[NSUUID UUID] UUIDString]];
