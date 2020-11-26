@@ -318,7 +318,7 @@ public class FileTransferBackground extends CordovaPlugin {
                     .setUploadID(uploadId)
                     .setFileToUpload(payload.get("filePath").toString())
                     .setMaxRetries(0);
-        } catch (IllegalArgumentException | FileNotFoundException | IOException error) {
+        } catch (IllegalArgumentException | IOException error) {
             sendAddingUploadError(uploadId, error);
             return;
         }
