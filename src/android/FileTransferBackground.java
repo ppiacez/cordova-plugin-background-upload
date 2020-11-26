@@ -316,7 +316,7 @@ public class FileTransferBackground extends CordovaPlugin {
         }
         BinaryUploadRequest request = null;
         try {
-            request = new BinaryUploadRequest(this.cordova.getActivity().getApplicationContext(), puploadId, ayload.get("serverUrl").toString())
+            request = new BinaryUploadRequest(this.cordova.getActivity().getApplicationContext(), uploadId, payload.get("serverUrl").toString())
                     .setMethod("PUT")
                     .setFileToUpload(payload.get("filePath").toString())
                     .setMaxRetries(0);
