@@ -15,11 +15,6 @@ import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork;
 import com.sromku.simple.storage.SimpleStorage;
 import com.sromku.simple.storage.Storage;
 import com.sromku.simple.storage.helpers.OrderType;
-
-import net.gotev.uploadservice.MultipartUploadRequest;
-import net.gotev.uploadservice.BinaryUploadRequest;
-import net.gotev.uploadservice.ServerResponse;
-import net.gotev.uploadservice.UploadInfo;
 import android.app.NotificationChannel;
 
 import net.gotev.uploadservice.UploadService;
@@ -33,6 +28,7 @@ import net.gotev.uploadservice.observer.request.RequestObserver;
 import net.gotev.uploadservice.observer.request.RequestObserverDelegate;
 import net.gotev.uploadservice.okhttp.OkHttpStack;
 import net.gotev.uploadservice.protocols.multipart.MultipartUploadRequest;
+import net.gotev.uploadservice.protocols.binary.BinaryUploadRequest;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -316,8 +312,9 @@ public class FileTransferBackground extends CordovaPlugin {
         }
         BinaryUploadRequest request = null;
         try {
-            request = new BinaryUploadRequest(this.cordova.getActivity().getApplicationContext(), uploadId, payload.get("serverUrl").toString())
+            request = new BinaryUploadRequest(this.cordova.getActivity().getApplicationContext(), payload.get("serverUrl").toString())
                     .setMethod("PUT")
+                    .setUploadID(uploadId)
                     .setFileToUpload(payload.get("filePath").toString())
                     .setMaxRetries(0);
         } catch (IllegalArgumentException | FileNotFoundException error) {
