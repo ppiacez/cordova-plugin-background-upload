@@ -39,6 +39,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -317,7 +318,7 @@ public class FileTransferBackground extends CordovaPlugin {
                     .setUploadID(uploadId)
                     .setFileToUpload(payload.get("filePath").toString())
                     .setMaxRetries(0);
-        } catch (IllegalArgumentException | FileNotFoundException error) {
+        } catch (IllegalArgumentException | FileNotFoundException | IOException error) {
             sendAddingUploadError(uploadId, error);
             return;
         }
